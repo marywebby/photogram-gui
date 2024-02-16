@@ -1,6 +1,6 @@
 <h1>List of photos</h1>
 
-<form action="/insert_photo_record" method="post">
+<form action="/insert_photo">
 
   <label for="photo_image">Image</label>
   <input id="photo_image" type="text" name="photo_image" placeholder="Enter a URL for the image">
@@ -14,5 +14,31 @@
   <button>
     Add photo
   </button>
-
+  
 </form>
+
+<table border="1">
+  <tr>
+    <th>Image</th>
+    <th>Caption</th>
+    <th>Owner</th>
+    <th>Posted</th>
+    <th>See details</th>
+  </tr>
+  
+
+<% @list_of_photos.each do |a_photo| %>
+  <tr>
+    <td>
+      <img src="<%= a_photo.image %>" alt="photo image not avaliable">
+    </td>
+    <td> <%= a_photo.caption %> </td>
+    <td> <%= a_photo.poster.username %> </td>
+    <td> <%= a_photo.created_at %> </td>
+    <td> 
+      <a href="/photos/<%= a_photo.id %>">Show details</a>
+    </td>
+  </tr>
+<% end %>
+
+</table>
