@@ -37,20 +37,20 @@ class UsersController < ApplicationController
 
   end
 
-  def update_user
-    the_id = params.fetch("input_username")
-    the_user = User.where({ :id => the_id })
+  def update
+    the_id = params.fetch("the_id")
 
-    the_user.username = params.fetch("input_username")
+    matching_user = User.where({ :id => the_id }).first
 
-    the_user.save
-    # !! #<NoMethodError: undefined method `username' for "mary_updated":String>
+    matching_user.username = params.fetch("input_username")
 
-    next_url = "/users/" + the_id.to_s
+    matching_user.save
+    # matching_user.update(username: params.fetch("input_username"))
+
+    next_url = "/users/" + matching_user.username
 
     redirect_to(next_url)
 
     # render({ :template => "user_templates/update"})
   end 
 end
-
