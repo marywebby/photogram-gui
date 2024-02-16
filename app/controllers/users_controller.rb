@@ -39,16 +39,12 @@ class UsersController < ApplicationController
 
   def update_user
     the_id = params.fetch("input_username")
+    the_user = User.where({ :id => the_id })
 
-    matching_users = User.where({ :username => the_id })
-
-    the_user = matching_users.first
-
-    input_username = params.fetch("input_username")
-
-    the_user.username = input_username
+    the_user.username = params.fetch("input_username")
 
     the_user.save
+    # !! #<NoMethodError: undefined method `username' for "mary_updated":String>
 
     next_url = "/users/" + the_id.to_s
 
@@ -57,3 +53,4 @@ class UsersController < ApplicationController
     # render({ :template => "user_templates/update"})
   end 
 end
+

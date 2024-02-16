@@ -14,6 +14,10 @@ class PhotosController < ApplicationController
 
     @the_photo = matching_photos.first
 
+    # next_url = "/photos/" + the_photo.id.to_s
+
+    # redirect_to(next_url)
+
     render({ :template => "photo_templates/show"})
   end 
 
@@ -84,6 +88,12 @@ class PhotosController < ApplicationController
 
     a_new_comment.save
 
-    render({ :template => "photo_templates/new_comment" })
+    # @the_photo = Photo.where({ :id => input_photo_id })
+
+    next_url = "/photos/" + input_photo_id.to_s
+
+    redirect_to(next_url)
+
+    # redirect_to("/photos/#{input_photo_id}")
   end
 end 
